@@ -1,6 +1,6 @@
 # Belly_Button_Biodiversity
 ## Purpose
-Roza believes that the ideal bacteria needed to synthesize beef can be found in the belly button of some individuals. The purpose of this project was to assist Roza with building a dashboard that researchers and participants can assess to view the data collected during her research.
+Roza believes that the ideal bacteria needed to synthesize beef can be found in the belly button of some individuals. The purpose of this project was to assist Roza with building a dashboard that researchers and study participants can assess to view the data collected during her research.
 
 ## Resources:
 - Data Source: [samples.json](samples.json)
@@ -9,7 +9,7 @@ Roza believes that the ideal bacteria needed to synthesize beef can be found in 
 
 The webpage can be accessed at [Belly Button Biodiversity Dashboard](https://danig89.github.io/Belly_Button_Biodiversity/).
 <br>
-<b>Note: Jumbotron image does not display in link. Please view image below.
+<b>Note: Jumbotron image does not display in the above link. Please view image below for completed webpage.
 <br>
 <br>
   
