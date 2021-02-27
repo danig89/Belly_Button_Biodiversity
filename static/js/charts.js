@@ -60,14 +60,14 @@ function buildCharts(sample) {
     // 3. Create a variable that holds the samples array. 
     var sampleData = data.samples;
     // 4. Create a variable that filters the samples for the object with the desired sample number.
-    var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+    var filter = sampleData.filter(sampleObj => sampleObj.id == sample);
     //  5. Create a variable that holds the first sample in the array.
-    var result = resultArray[0];
+    var result = filter[0];
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otu_ids = firstSample.otu_ids;
-    var otu_labels = firstSample.otu_labels;
-    var sample_values = firstSample.sample_values;
+    var otu_ids = result.otu_ids;
+    var otu_labels = result.otu_labels;
+    var sample_values = result.sample_values;
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -95,11 +95,9 @@ function buildCharts(sample) {
     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot('bar', barData, barLayout);
-  });
-}
 
     // Bubble Chart
-
+    
     // 1. Create the trace for the bubble chart.
     var bubbleData = {
       x: otu_ids,
@@ -107,24 +105,25 @@ function buildCharts(sample) {
       text: otu_labels,
       mode: 'markers',
       marker: {
-        color: [otu_ids],
-        size: [sample_values]
+        color: otu_ids,
+        size: sample_values,
+        colorscale: "Earth"
 
       }
       };
 
     // 2. Create the layout for the bubble chart.
     var bubbleLayout = {
-      title: 'Bacteria Cultures Per Sample',
+      title: "<b>Bacteria Cultures Per Sample</b>",
       xaxis: { title: "OTU ID" },
       hovermode:'closest',
       height: 600,
-      width: 600
-      
+      width: 1100
+
     };
 
     // 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot('bubble', bubbleData, bubbleLayout);
+    Plotly.newPlot('bubble', [bubbleData], bubbleLayout);
 
     // Gauge
 
@@ -132,29 +131,31 @@ function buildCharts(sample) {
     var metadata = data.metadata;
     
     // Create a variable that holds the first sample in the array.
-    var filters = sampledata.filter(sampleObj => sampleObj.id == sample);
+    var filters = metadata.filter(sampleObj => sampleObj.id == sample);
 
     // 2. Create a variable that holds the first sample in the metadata array.
-    var result = filters[0];
+    var first = data.samples[0];
 
     // Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otu_ids = firstArray.otu_ids;
-    var otu_labels = firstArray.otu_labels;
-    var sample_values = firstArray.sample_values;
+    var otu_ids = first.otu_ids;
+    var otu_labels = first.otu_labels;
+    var sample_values = first.sample_values;
 
     // 3. Create a variable that holds the washing frequency.
-    var washingFrequency = firstArray.washingFrequency;
+    var filter = filters[0];
+    var washingFrequency = filter.wfreq;
 
     // Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
     // so the otu_ids with the most bacteria are last. 
+
     var yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`);
     
     // 4. Create the trace for the gauge chart.
     var gaugeData = [
       {
         value: washingFrequency,
-        title: { text: "Belly Button Washing Frequency" },
+        title: { text: "<br><b>Belly Button Washing Frequency <br>Scrubs per Week</b>" },
         type: "indicator",
         mode: "gauge+number",
         gauge: {
@@ -173,8 +174,11 @@ function buildCharts(sample) {
     
     // 5. Create the layout for the gauge chart.
     var gaugeLayout = {
-      width: 600, height: 500, margin: { t: 0, b: 0 }
+      width: 460, height: 400, margin: { t: 0, b: 0 }
     };
 
     // 6. Use Plotly to plot the gauge data and layout.
-    Plotly.newPlot('gauge',gaugeData,guageLayout);
+    Plotly.newPlot('gauge', gaugeData, gaugeLayout);
+
+    });
+  }
